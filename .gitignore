@@ -1,0 +1,24 @@
+# --- Godot/GDExtension specific ---
+bin/*.dll
+bin/*.exp
+bin/*.lib
+bin/*.pdb
+# Keep the .gdextension file though!
+!bin/*.gdextension
+
+# --- SCons/Build artifacts ---
+.sconsign.dblite
+*.obj
+godot-cpp-master/
+
+# --- Visual Studio temporary files ---
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.protores
+
+# --- OS specific ---
+.DS_Store
+Thumbs.db
