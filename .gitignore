@@ -22,3 +22,11 @@ godot-cpp-master/
 # --- OS specific ---
 .DS_Store
 Thumbs.db
+
+# --- Godot Project files ---
+.godot/
+*.import
+# if you don't want to track the default Godot icons/config:
+# icon.svg
+# .editorconfig
+# .gitattributes

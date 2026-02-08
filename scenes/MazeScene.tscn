@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://t2ojanyhhpqs"]
+
+[node name="Node3D" type="Node3D" unique_id=2070051584]
+
+[node name="MazeGenerator" type="MazeGenerator" parent="." unique_id=1030245697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0240803, 1.4268107, 0)
