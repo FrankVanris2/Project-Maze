@@ -95,6 +95,17 @@ void MazeGenerator::createExits() {
 
 // The rendering of the Maze in the Godot scene.
 void MazeGenerator::renderMaze() {
+    // 1. Create Wall Material (Dark Red/Stone) NOTE: Create these as functions later
+    Ref<StandardMaterial3D> wall_mat;
+    wall_mat.instantiate();
+    wall_mat->set_albedo(Color(0.5, 0.2, 0.15)); // A deep crimson
+    wall_mat->set_roughness(0.8); // High roughness for a stone-like appearance
+    
+    // 2. Create Floor Material (Dark Grey/ Slate)
+    Ref<StandardMaterial3D> floor_mat;
+    floor_mat.instantiate();
+    floor_mat->set_albedo(Color(0.1, 0.1, 0.1)); // Near black
+
 
     // Wall render
     Ref<BoxMesh> wall_mesh;
@@ -117,14 +128,17 @@ void MazeGenerator::renderMaze() {
                 // SPAWN WALL
                 instance->set_mesh(wall_mesh);
                 instance->set_position(Vector3(x, wall_height / 2.0f, y));
+                instance->set_material_override(wall_mat);
             } else {
                 // SPAWN FLOOR
                 instance->set_mesh(floor_mesh);
                 // Position floor slightly below 0 so it doesn't "flicker" with the ground
                 instance->set_position(Vector3(x, -floor_thickness / 2.0f, y));
+                instance->set_material_override(floor_mat);
             }
 
             add_child(instance);
         }
     }
 }
+

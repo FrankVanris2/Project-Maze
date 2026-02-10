@@ -3,6 +3,7 @@
 #include <godot_cpp/classes/node3d.hpp>
 #include <godot_cpp/classes/mesh_instance3d.hpp>
 #include <godot_cpp/classes/box_mesh.hpp>
+#include <godot_cpp/classes/standard_material3d.hpp>
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
@@ -39,6 +40,7 @@ private:
     void generateRecursive(int x, int y);
     void createExits();
 
+    // Maze rendering function
     void renderMaze();
 
 };
