@@ -19,6 +19,8 @@ MazeGenerator::MazeGenerator() : g(rd()) {
         }
     }
 
+    
+
     start_x = (rand() % (width / 2)) * 2 + 1; // Ensure start_x is odd
     start_y = (rand() % (height / 2)) * 2 + 1; // Ensure start_y is odd
     if (start_x % 2 == 0) start_x += 1;
@@ -33,8 +35,8 @@ MazeGenerator::~MazeGenerator() {
 
 int MazeGenerator::randomIntCreator() {
     // Generates a random integer that is odd for both width and height
-    int min = 21;
-    int max = 51;
+    int min = 51;
+    int max = 81;
     int randomNum = rand() % (max - min + 1) + min;
     if (randomNum % 2 == 0) {
         randomNum += 1; // Ensuring that the number is odd
@@ -47,6 +49,16 @@ void MazeGenerator::generateMaze() {
 
     // Create 4 exits in the maze.
     createExits();
+
+    center_x = width / 2;
+    center_y = height / 2;
+
+    if (center_x % 2 == 0) center_x++;
+    if (center_y % 2 == 0) center_y++;
+
+    offset = 3;
+
+    createCenterRoom(center_x, center_y, offset);
 
     // Render the maze in the Godot scene
     renderMaze();
@@ -91,6 +103,20 @@ void MazeGenerator::createExits() {
     maze[rand_y][width - 1] = 0; // Create an exit on the East border
     maze[rand_y][width - 2] = 0; // Ensure the exit is connected to the maze
 
+}
+
+void MazeGenerator::createCenterRoom(int center_x, int center_y, int offset) {  
+    // Create a 3x3 room in the center of the maze
+    for (int y = center_y - offset; y <= center_y + offset; ++y) {
+        for (int x = center_x - offset; x <= center_x + offset; ++x) {
+            if (x >= 0 && x < width && y >= 0 && y < height) {
+                maze[y][x] = 0; // Mark the cell as a path (0)
+            }
+        }
+    }
+
+    maze[center_y - 3][center_x] = 0; // North Door
+    maze[center_y + 3][center_x] = 0; // South Door
 }
 
 // The rendering of the Maze in the Godot scene.

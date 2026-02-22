@@ -31,6 +31,10 @@ private:
     int start_x;
     int start_y;
 
+    int center_x;
+    int center_y;
+    int offset;
+
     std::random_device rd;
     std::mt19937 g;
     int randomIntCreator();
@@ -39,6 +43,7 @@ private:
     void generateMaze();
     void generateRecursive(int x, int y);
     void createExits();
+    void createCenterRoom(int center_x, int center_y, int offset);
 
     // Maze rendering function
     void renderMaze();
