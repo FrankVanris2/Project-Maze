@@ -8,7 +8,14 @@ void MazeGenerator::_bind_methods() {
 
 MazeGenerator::MazeGenerator() : g(rd()) {
     // Constructor logic
-    srand(time(0));
+    srand(time(0));    
+}
+
+MazeGenerator::~MazeGenerator() {
+    // Destructor logic
+}
+
+void MazeGenerator::_ready() {
     width = randomIntCreator();
     height = randomIntCreator();
     maze.resize(height, std::vector<int>(width, 0));
@@ -19,18 +26,12 @@ MazeGenerator::MazeGenerator() : g(rd()) {
         }
     }
 
-    
-
     start_x = (rand() % (width / 2)) * 2 + 1; // Ensure start_x is odd
     start_y = (rand() % (height / 2)) * 2 + 1; // Ensure start_y is odd
     if (start_x % 2 == 0) start_x += 1;
     if (start_y % 2 == 0) start_y += 1;
 
     generateMaze();
-}
-
-MazeGenerator::~MazeGenerator() {
-    // Destructor logic
 }
 
 int MazeGenerator::randomIntCreator() {
@@ -142,7 +143,7 @@ void MazeGenerator::renderMaze() {
     // Floor render
     Ref<BoxMesh> floor_mesh;
     floor_mesh.instantiate();
-    float floor_thickness = 0.1f;
+    float floor_thickness = 2.0f;
     floor_mesh->set_size(Vector3(1, floor_thickness, 1));
 
     for(int y = 0; y < height; y++) {
@@ -162,7 +163,26 @@ void MazeGenerator::renderMaze() {
                 instance->set_position(Vector3(x, -floor_thickness / 2.0f, y));
                 instance->set_material_override(floor_mat);
             }
+            
+            // 1. Create a StaticBody (The physics object)
+            StaticBody3D *static_body = memnew(StaticBody3D);
+            instance->add_child(static_body); // Add it to our mesh instance
 
+            // 2. Create a CollisionShape (The "hitbox")
+            CollisionShape3D *collision_shape = memnew(CollisionShape3D);
+            static_body->add_child(collision_shape);
+
+            // 3. Create the actual Shape geometry (A Box)
+            Ref<BoxShape3D> box;
+            box.instantiate();
+            
+            if (maze[y][x] == 1) {
+                box->set_size(Vector3(1, wall_height, 1));
+            } else {
+                box->set_size(Vector3(1, floor_thickness, 1));
+            }
+            
+            collision_shape->set_shape(box);
             add_child(instance);
         }
     }

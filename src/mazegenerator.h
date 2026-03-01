@@ -4,6 +4,9 @@
 #include <godot_cpp/classes/mesh_instance3d.hpp>
 #include <godot_cpp/classes/box_mesh.hpp>
 #include <godot_cpp/classes/standard_material3d.hpp>
+#include <godot_cpp/classes/static_body3d.hpp>
+#include <godot_cpp/classes/collision_shape3d.hpp>
+#include <godot_cpp/classes/box_shape3d.hpp>
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
@@ -22,6 +25,8 @@ protected:
 public: 
     MazeGenerator();
     ~MazeGenerator();
+    void _ready() override;
+
 
 private: 
     std::vector<std::vector<int>> maze; 
