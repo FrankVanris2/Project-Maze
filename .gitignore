@@ -30,3 +30,6 @@ Thumbs.db
 # icon.svg
 # .editorconfig
 # .gitattributes
+
+# --- Log Files ---
+Development-Logs/
