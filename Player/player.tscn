@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cgf26634in1na"]
 
 [ext_resource type="Script" uid="uid://sar6y371r54g" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://qml6xoo0tj5n" path="res://Player/stamina_component.gd" id="2_4ntmi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 radius = 0.1
@@ -28,3 +29,6 @@ offset_bottom = 618.0
 step = 0.1
 value = 100.0
 show_percentage = false
+
+[node name="StaminaComponent" type="Node" parent="." unique_id=1961013962]
+script = ExtResource("2_4ntmi")
