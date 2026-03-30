@@ -7,6 +7,7 @@
 #include <godot_cpp/classes/static_body3d.hpp>
 #include <godot_cpp/classes/collision_shape3d.hpp>
 #include <godot_cpp/classes/box_shape3d.hpp>
+#include <godot_cpp/classes/marker3d.hpp>
 #include <vector>
 #include <stdlib.h>
 #include <time.h>

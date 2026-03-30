@@ -9,9 +9,23 @@ const MOUSE_SENSITIVITY = 0.002
 @onready var stamina_bar = $UI/StaminaBar
 @onready var stamina_component = $StaminaComponent # Grab our new Component!
 
+@export var maze_generator: Node3D
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Waiting for the  C++ Nodes along with the Spawn Point to generate
 	await get_tree().physics_frame
+	
+	# Asking the Scene Tree for any NODE in the "Spawn point" group
+	var spawn_points = get_tree().get_nodes_in_group("spawn_point")
+	
+	if spawn_points.size() > 0:
+		# Teleport to the first SpawnPoint we found
+		global_position = spawn_points[0].global_position
+		print("Player cleanly Teleported via SOLID group Decoupling")
+	else:
+		print("No spawn point found in the world")
+		
 	
 func _unhandled_input(event):
 	

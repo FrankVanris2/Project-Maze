@@ -106,6 +106,7 @@ void MazeGenerator::createExits() {
 
 }
 
+// Creating a center room in the middle of the maze
 void MazeGenerator::createCenterRoom(int center_x, int center_y, int offset) {  
     // Create a 3x3 room in the center of the maze
     for (int y = center_y - offset; y <= center_y + offset; ++y) {
@@ -122,6 +123,13 @@ void MazeGenerator::createCenterRoom(int center_x, int center_y, int offset) {
 
 // The rendering of the Maze in the Godot scene.
 void MazeGenerator::renderMaze() {
+    // -- SOLID SPAWN POINT --
+    // We create a phyisical marker and tag it, so the maze doesn't have to talk to  the player.
+    Marker3D *spawn_marker = memnew(Marker3D);
+    spawn_marker->set_position(Vector3(center_x, 0.0f , center_y));
+    spawn_marker->add_to_group("spawn_point");
+    add_child(spawn_marker);
+
     // 1. Create Wall Material (Dark Red/Stone) NOTE: Create these as functions later
     Ref<StandardMaterial3D> wall_mat;
     wall_mat.instantiate();
