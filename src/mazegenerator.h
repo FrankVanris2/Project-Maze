@@ -51,6 +51,9 @@ private:
     void createExits();
     void createCenterRoom(int center_x, int center_y, int offset);
 
+    // Spawn point function
+    void createSpawnPoints();
+    
     // Maze rendering function
     void renderMaze();
 

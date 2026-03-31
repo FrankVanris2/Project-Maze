@@ -121,14 +121,27 @@ void MazeGenerator::createCenterRoom(int center_x, int center_y, int offset) {
     maze[center_y + 3][center_x] = 0; // South Door
 }
 
+void MazeGenerator::createSpawnPoints() {
+    float radius = 2.5f; // Radius around the center for spawn points
+    for (int i = 0; i < 10; i++) {
+        float angle = (2.0f * 3.14159f / 10.0f); // This will soon change based on the number of players that join the game.
+
+        float x_offset = std::cos(angle) * radius;
+        float y_offset = std::sin(angle) * radius;
+
+        Marker3D *spawn_marker = memnew(Marker3D);
+        spawn_marker->set_position(Vector3(center_x + x_offset, 0.0f, center_y + y_offset));
+        spawn_marker->add_to_group("spawn_point");
+        add_child(spawn_marker);
+
+    }
+}
+
 // The rendering of the Maze in the Godot scene.
 void MazeGenerator::renderMaze() {
     // -- SOLID SPAWN POINT --
     // We create a phyisical marker and tag it, so the maze doesn't have to talk to  the player.
-    Marker3D *spawn_marker = memnew(Marker3D);
-    spawn_marker->set_position(Vector3(center_x, 0.0f , center_y));
-    spawn_marker->add_to_group("spawn_point");
-    add_child(spawn_marker);
+    createSpawnPoints();
 
     // 1. Create Wall Material (Dark Red/Stone) NOTE: Create these as functions later
     Ref<StandardMaterial3D> wall_mat;
