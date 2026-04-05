@@ -1,5 +1,6 @@
 #ifndef MAZEGENERATOR_H
 #define MAZEGENERATOR_H
+
 #include <godot_cpp/classes/node3d.hpp>
 #include <godot_cpp/classes/mesh_instance3d.hpp>
 #include <godot_cpp/classes/box_mesh.hpp>
@@ -7,13 +8,11 @@
 #include <godot_cpp/classes/static_body3d.hpp>
 #include <godot_cpp/classes/collision_shape3d.hpp>
 #include <godot_cpp/classes/box_shape3d.hpp>
-#include <godot_cpp/classes/marker3d.hpp>
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
 #include <algorithm> // For std::shuffle
 #include <random> // For std::mt19937 and std::random_device
-
 
 namespace godot {
 
@@ -28,7 +27,12 @@ public:
     ~MazeGenerator();
     void _ready() override;
 
-
+    // --- PUBLIC GETTER METHODS ---
+    int getWidth() const { return width; }
+    int getHeight() const { return height; }
+    int getCenterX() const { return center_x; }
+    int getCenterY() const { return center_y; }
+    int get_cell(int x, int y) const { return maze[y][x]; }
 private: 
     std::vector<std::vector<int>> maze; 
     int width;
@@ -45,16 +49,11 @@ private:
     std::mt19937 g;
     int randomIntCreator();
 
-    // Maze generation functions
     void generateMaze();
     void generateRecursive(int x, int y);
     void createExits();
     void createCenterRoom(int center_x, int center_y, int offset);
 
-    // Spawn point function
-    void createSpawnPoints();
-    
-    // Maze rendering function
     void renderMaze();
 
 };

@@ -17,7 +17,7 @@ func _ready():
 	await get_tree().physics_frame
 	
 	# Asking the Scene Tree for any NODE in the "Spawn point" group
-	var spawn_points = get_tree().get_nodes_in_group("spawn_point")
+	var spawn_points = get_tree().get_nodes_in_group("spawn_points")
 	
 	if spawn_points.size() > 0:
 		# Teleport to the first SpawnPoint we found
