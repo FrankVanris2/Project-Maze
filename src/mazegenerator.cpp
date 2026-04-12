@@ -37,8 +37,8 @@ void MazeGenerator::_ready() {
 
 int MazeGenerator::randomIntCreator() {
     // Generates a random integer that is odd for both width and height
-    int min = 51;
-    int max = 81;
+    int min = 21; // Min Original is always 51, only change for debugging purposes
+    int max = 21; // Max Original is always 81, only change for debugging purposes
     int randomNum = rand() % (max - min + 1) + min;
     if (randomNum % 2 == 0) {
         randomNum += 1; // Ensuring that the number is odd

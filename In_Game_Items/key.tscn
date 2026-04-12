@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bgeturjgxgvv7"]
+
+[ext_resource type="Script" uid="uid://kujqi7bn760c" path="res://In_Game_Items/key.gd" id="1_kybq1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_408nl"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kybq1"]
+material = SubResource("StandardMaterial3D_408nl")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Key" type="Node3D" unique_id=1770989491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0246582, 0)
+script = ExtResource("1_kybq1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=920276190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.64105225, 0)
+mesh = SubResource("BoxMesh_kybq1")

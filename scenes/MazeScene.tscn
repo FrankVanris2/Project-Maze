@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://t2ojanyhhpqs"]
 
 [ext_resource type="PackedScene" uid="uid://cgf26634in1na" path="res://Player/player.tscn" id="1_7cu3m"]
+[ext_resource type="Script" uid="uid://wi7kiks1704p" path="res://scenes/game_manager.gd" id="2_66pjl"]
+[ext_resource type="PackedScene" uid="uid://bgeturjgxgvv7" path="res://In_Game_Items/key.tscn" id="3_o1j8b"]
+[ext_resource type="PackedScene" uid="uid://iexenmgkokaa" path="res://Doors/exit_door.tscn" id="4_i851l"]
+[ext_resource type="Script" uid="uid://gwr5q24futa3" path="res://scenes/developer_cheats.gd" id="5_i851l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7cu3m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,3 +34,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0240803, 1.4268107, 0)
 
 [node name="Player" parent="." unique_id=83683272 instance=ExtResource("1_7cu3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.39311, 20.934086, 37.342884)
+
+[node name="GameManager" type="Node" parent="." unique_id=1873968546]
+script = ExtResource("2_66pjl")
+key_scene = ExtResource("3_o1j8b")
+door_scene = ExtResource("4_i851l")
+
+[node name="DeveloperCheats" type="Node" parent="." unique_id=823994210 node_paths=PackedStringArray("maze_generator")]
+script = ExtResource("5_i851l")
+maze_generator = NodePath("../MazeGenerator")
