@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dah80xqtcnabx"]
+
+[ext_resource type="Script" uid="uid://nc1vyx52rq4p" path="res://Player/inventory_ui.gd" id="1_welnl"]
+
+[node name="InventoryUI" type="CanvasLayer" unique_id=1233989924]
+script = ExtResource("1_welnl")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=767034362]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=984403513]
+layout_mode = 2
+
+[node name="Slot1" type="ColorRect" parent="MarginContainer/HBoxContainer" unique_id=488845003]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.8)
+
+[node name="Slot2" type="ColorRect" parent="MarginContainer/HBoxContainer" unique_id=1687379300]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.8)
+
+[node name="Slot3" type="ColorRect" parent="MarginContainer/HBoxContainer" unique_id=1957653169]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.8)

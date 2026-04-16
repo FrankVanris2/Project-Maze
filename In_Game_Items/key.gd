@@ -22,3 +22,13 @@ func _process(delta: float) -> void:
 	#2. Bob it up and down using a Sine wave
 	time_passed += delta
 	global_position.y = start_y + (sin(time_passed * bob_speed) * bob_height)
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	# DUCK TYPING: Does this object have our interface method?
+	print("Something touched the key: ", body.name)
+	if body.has_method("add_item"):
+		# Try to pass a generic string identifier
+		var was_picked_up = body.add_item("golden_key")
+		
+		if was_picked_up:
+			queue_free()

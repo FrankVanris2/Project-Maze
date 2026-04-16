@@ -1,18 +1,32 @@
 extends CharacterBody3D
 
+# GAME CONSTANTS
 const WALK_SPEED = 1.5
 const RUN_SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.002
 
+# GAME RELATED REFERENCES
 @onready var camera = $Camera3D
 @onready var stamina_bar = $UI/StaminaBar
 @onready var stamina_component = $StaminaComponent # Grab our new Component!
-
+@onready var inventory = $InventoryComponent
+@onready var inventory_ui = $InventoryUI
 @export var maze_generator: Node3D
+
+# --- PLAYER RELATED SETUPS --- #
+func add_item(item_name: String) -> bool:
+		# We just pass the request down to the component
+		if inventory:
+			return inventory.add_item(item_name)
+		return false
+		
+# --- GAME RELATED STARTUPS --- #
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	# --- CONNECT THE OBSERVER ---
+	inventory.inventory_updated.connect(inventory_ui._on_inventory_updated)
 	# Waiting for the  C++ Nodes along with the Spawn Point to generate
 	await get_tree().physics_frame
 	
