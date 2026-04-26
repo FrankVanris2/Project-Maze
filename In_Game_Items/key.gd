@@ -1,16 +1,31 @@
 extends Node3D
 
 @export var spin_speed: float = 2.0
-@export var bob_height: float = 0.5
+@export var bob_height: float = 0.1
 @export var bob_speed: float = 3.0
+@export var hover_offset: float = 0.3
+
+@onready var floor_detector = $RayCast3D
+
 var time_passed: float = 0.0
 var start_y: float
 
 func _ready() -> void:
-	start_y = global_position.y
-	# Force the signal connection through code to guarantee it works!
+	
+	# 1. Force the laser to check the physics world
+	floor_detector.force_raycast_update()
+	
+	# 2. Did the laser hit the floor?
+	if floor_detector.is_colliding():
+		var hit_point = floor_detector.get_collision_point()
+		start_y = hit_point.y + hover_offset
+		print("Key snapped to floor at Y: ", hit_point.y)
+	else:
+		start_y = global_position.y + hover_offset
+		
 	$Area3D.body_entered.connect(_on_area_3d_body_entered)
-
+		
+	
 func _process(delta: float) -> void:
 	rotate_y(spin_speed * delta)
 	time_passed += delta
