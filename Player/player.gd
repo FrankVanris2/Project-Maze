@@ -20,7 +20,12 @@ func add_item(item_name: String) -> bool:
 		if inventory:
 			return inventory.add_item(item_name)
 		return false
-		
+
+func get_item_count() -> int:
+	if inventory:
+		return inventory.items.size()
+	return 0;
+	
 # --- GAME RELATED STARTUPS --- #
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
