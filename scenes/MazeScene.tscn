@@ -6,8 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://iexenmgkokaa" path="res://Doors/exit_door.tscn" id="4_i851l"]
 [ext_resource type="Script" uid="uid://gwr5q24futa3" path="res://scenes/developer_cheats.gd" id="5_i851l"]
 
+[sub_resource type="Gradient" id="Gradient_i851l"]
+offsets = PackedFloat32Array(0, 0.51369864, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.04755766, 0.047557645, 0.047557645, 0.15753424, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yabnw"]
+seed = 4
+frequency = 0.02
+offset = Vector3(-346.15, -269.23, -384.61)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gi2me"]
+noise = SubResource("FastNoiseLite_yabnw")
+color_ramp = SubResource("Gradient_i851l")
+in_3d_space = true
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7cu3m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_curve = 0.17838097
+sky_cover = SubResource("NoiseTexture2D_gi2me")
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
 [sub_resource type="Sky" id="Sky_66pjl"]
@@ -26,7 +42,7 @@ glow_enabled = true
 environment = SubResource("Environment_s7ue0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1575654059]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 24.016846, 54.560516, 20.512749)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 67.98127, 54.560516, 20.512749)
 shadow_enabled = true
 
 [node name="MazeGenerator" type="MazeGenerator" parent="." unique_id=1030245697]
