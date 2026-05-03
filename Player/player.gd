@@ -32,6 +32,7 @@ func _ready():
 	
 	# --- CONNECT THE OBSERVER ---
 	inventory.inventory_updated.connect(inventory_ui._on_inventory_updated)
+	inventory.active_slot_changed.connect(inventory_ui._on_active_slot_changed)
 	# Waiting for the  C++ Nodes along with the Spawn Point to generate
 	await get_tree().physics_frame
 	
