@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+const KEY_SCENE = preload("res://In_Game_Items/key.tscn")
 # GAME CONSTANTS
 const WALK_SPEED = 1.5
 const RUN_SPEED = 3.0
@@ -33,6 +33,7 @@ func _ready():
 	# --- CONNECT THE OBSERVER ---
 	inventory.inventory_updated.connect(inventory_ui._on_inventory_updated)
 	inventory.active_slot_changed.connect(inventory_ui._on_active_slot_changed)
+	inventory.item_dropped.connect(_on_item_dropped)
 	# Waiting for the  C++ Nodes along with the Spawn Point to generate
 	await get_tree().physics_frame
 	
@@ -96,3 +97,15 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	move_and_slide()
+
+# --- INVENTORY ACTIONS ---
+func _on_item_dropped(item_name: String) -> void:
+	if item_name == "golden_key":
+		# 1. Create a brand new copy of the Key
+		var dropped_key = KEY_SCENE.instantiate()
+		var forward_direction = -camera.global_transform.basis.z.normalized()
+		var drop_position = global_position + (forward_direction * 2.0) + Vector3(0, 1.0, 0)
+		dropped_key.global_position = drop_position
+		get_tree().current_scene.add_child(dropped_key)
+		
+		

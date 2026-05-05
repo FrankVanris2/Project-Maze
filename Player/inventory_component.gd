@@ -3,6 +3,8 @@ class_name InventoryComponent
 
 signal inventory_updated(items: Array) # --- ADD THIS SIGNAL ----
 signal active_slot_changed(index: int)
+signal item_dropped(item_name: String) # --- DROP ITEM SIGNAL ----
+
 @export var max_capacity: int = 3
 var items: Array = []
 var active_slot_index: int = 0
@@ -30,6 +32,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		if active_slot_index >= max_capacity:
 			active_slot_index = 0
 		slot_changed = true
+	
+	elif event.is_action_pressed("drop_item"):
+			if active_slot_index < items.size():
+				var item_to_drop = items[active_slot_index]
+				items.remove_at(active_slot_index)
+				inventory_updated.emit(items)
+				item_dropped.emit(item_to_drop)
+				print("Component dropped: ", item_to_drop)
 	
 	if slot_changed:
 		active_slot_changed.emit(active_slot_index)
