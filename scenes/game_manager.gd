@@ -23,10 +23,13 @@ func spawn_keys() :
 	for marker in key_markers:
 		if key_scene:
 			var new_key = key_scene.instantiate()
-			# Copy the invisible marker's position
-			new_key.global_position = marker.global_position
 			# Add it to the new world
+			
+			# Copy the invisible marker's position
 			add_child(new_key)
+			new_key.global_position = marker.global_position + Vector3(0, 6.0, 0)
+			
+			
 	print("Spawned: ", key_markers.size(), " Keys.")
 
 func spawn_doors() :
@@ -34,8 +37,9 @@ func spawn_doors() :
 	for marker in door_markers:
 		if door_scene:
 			var new_door = door_scene.instantiate()
-			new_door.global_position = marker.global_position
 			add_child(new_door)
+			new_door.global_position = marker.global_position
+			
 	print("Spawned: ", door_markers.size(), " Doors.")
 	
 	
