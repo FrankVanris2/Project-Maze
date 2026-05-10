@@ -1,5 +1,7 @@
 extends CharacterBody3D
-const KEY_SCENE = preload("res://In_Game_Items/key.tscn")
+
+# Item Database:
+@export var droppable_items: Dictionary = {}
 # GAME CONSTANTS
 const WALK_SPEED = 1.5
 const RUN_SPEED = 3.0
@@ -100,41 +102,44 @@ func _physics_process(delta: float) -> void:
 
 # --- INVENTORY ACTIONS ---
 func _on_item_dropped(item_name: String) -> void:
-	if item_name == "golden_key":
-		var dropped_key = KEY_SCENE.instantiate()
+	# 1. Check if the item exists in our database
+	if not droppable_items.has(item_name):
+		print("ERROR: No scene found in database for item: ", item_name)
+		return
+	
+	# 2. Instantiate WHATEVER scene the database gave us
+	var item_scene = droppable_items[item_name]
+	var dropped_item = item_scene.instantiate()
 		
-		var camera_pos = camera.global_position
-		var forward_direction = -camera.global_transform.basis.z.normalized()
-		var ideal_drop_pos = camera_pos + (forward_direction * 2.0)
+	var camera_pos = camera.global_position
+	var forward_direction = -camera.global_transform.basis.z.normalized()
+	var ideal_drop_pos = camera_pos + (forward_direction * 1.0)
 		
-		var space_state = get_world_3d().direct_space_state
+	var space_state = get_world_3d().direct_space_state
 		
-		# LASER 1: Check for walls straight ahead
-		var wall_query = PhysicsRayQueryParameters3D.create(camera_pos, ideal_drop_pos)
-		wall_query.collision_mask = 1
-		wall_query.exclude = [self.get_rid()]
+	var wall_query = PhysicsRayQueryParameters3D.create(camera_pos, ideal_drop_pos)
+	wall_query.collision_mask = 1
+	wall_query.exclude = [self.get_rid()]
 		
-		var wall_result = space_state.intersect_ray(wall_query)
-		var final_drop_pos = ideal_drop_pos
+	var wall_result = space_state.intersect_ray(wall_query)
+	var final_drop_pos = ideal_drop_pos
 		
-		if wall_result:
-			final_drop_pos = wall_result.position + (wall_result.normal * 0.2)
-			
-		# LASER 2: Shoot straight down from that spot to find the exact floor height!
-		var floor_query = PhysicsRayQueryParameters3D.create(final_drop_pos, final_drop_pos + Vector3(0, -50.0, 0))
-		floor_query.collision_mask = 1
-		var floor_result = space_state.intersect_ray(floor_query)
+	if wall_result:
+		final_drop_pos = wall_result.position + (wall_result.normal * 0.2)
 		
-		if floor_result:
-			# We found the floor! Set the landing spot exactly 1 meter above it
-			final_drop_pos.y = floor_result.position.y + 0.3
+	var floor_query = PhysicsRayQueryParameters3D.create(final_drop_pos, final_drop_pos + Vector3(0, -50.0, 0))
+	floor_query.collision_mask = 1
+	var floor_result = space_state.intersect_ray(floor_query)
 		
-		# Add a name tag so I can easily find it in the Remote Tree
-		dropped_key.name = "DROPPED_KEY"
-		
-		dropped_key.is_animating_drop = true
-		# Add it to the world and start and toss animation
-		get_tree().current_scene.add_child(dropped_key)
-		dropped_key.toss_from(camera_pos, final_drop_pos)
+	if floor_result:
+		# blindly trust that the item has a "hover_offset" property
+		final_drop_pos.y = floor_result.position.y + dropped_item.hover_offset
+	
+	# Dynamically name it so you can find it in the Remote Tree
+	dropped_item.name = "DROPPED_" + item_name.to_upper()
+	
+	dropped_item.is_animating_drop = true
+	get_tree().current_scene.add_child(dropped_item)
+	dropped_item.toss_from(camera_pos, final_drop_pos)
 		
 		

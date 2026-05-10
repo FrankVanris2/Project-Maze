@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://sar6y371r54g" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://qml6xoo0tj5n" path="res://Player/stamina_component.gd" id="2_4ntmi"]
+[ext_resource type="PackedScene" uid="uid://bgeturjgxgvv7" path="res://In_Game_Items/key.tscn" id="2_k53q1"]
 [ext_resource type="Script" uid="uid://cxifomux1tw6n" path="res://Player/inventory_component.gd" id="3_btcbx"]
 [ext_resource type="PackedScene" uid="uid://dah80xqtcnabx" path="res://Player/inventory_ui.tscn" id="4_gwnis"]
 
@@ -13,6 +14,9 @@ height = 0.4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17199183, 0)
 collision_layer = 2
 script = ExtResource("1_l8h54")
+droppable_items = {
+"golden_key": ExtResource("2_k53q1")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1960696350]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.001)
