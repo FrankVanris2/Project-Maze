@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://iexenmgkokaa"]
 
-[ext_resource type="Script" uid="uid://cltwgun8c6rr7" path="res://Doors/exit_door.gd" id="1_1vo2f"]
+[ext_resource type="Script" uid="uid://cltwgun8c6rr7" path="res://Items/Interactables/exit_door.gd" id="1_1vo2f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kg3h3"]
 albedo_color = Color(0.29803923, 0.73333335, 0.09019608, 1)

@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cgf26634in1na"]
 
-[ext_resource type="Script" uid="uid://sar6y371r54g" path="res://Player/player.gd" id="1_l8h54"]
-[ext_resource type="Script" uid="uid://qml6xoo0tj5n" path="res://Player/stamina_component.gd" id="2_4ntmi"]
-[ext_resource type="PackedScene" uid="uid://bgeturjgxgvv7" path="res://In_Game_Items/key.tscn" id="2_k53q1"]
-[ext_resource type="Script" uid="uid://cxifomux1tw6n" path="res://Player/inventory_component.gd" id="3_btcbx"]
-[ext_resource type="PackedScene" uid="uid://dah80xqtcnabx" path="res://Player/inventory_ui.tscn" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://sar6y371r54g" path="res://Entities/Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://qml6xoo0tj5n" path="res://Entities/Player/stamina_component.gd" id="2_4ntmi"]
+[ext_resource type="PackedScene" uid="uid://bgeturjgxgvv7" path="res://Items/Pickups/key.tscn" id="2_k53q1"]
+[ext_resource type="Script" uid="uid://cxifomux1tw6n" path="res://Entities/Player/inventory_component.gd" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://dah80xqtcnabx" path="res://UI/Inventory/inventory_ui.tscn" id="4_gwnis"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 radius = 0.1
