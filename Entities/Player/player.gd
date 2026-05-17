@@ -10,6 +10,7 @@ const MOUSE_SENSITIVITY = 0.002
 
 # GAME RELATED REFERENCES
 @onready var camera = $Camera3D
+@onready var interaction_ray = $Camera3D/InteractionRay
 @onready var stamina_bar = $UI/StaminaBar
 @onready var stamina_component = $StaminaComponent # Grab our new Component!
 @onready var inventory = $InventoryComponent
@@ -63,6 +64,9 @@ func _unhandled_input(event):
 		# Rotate the Camera up and down
 		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, -deg_to_rad(80), deg_to_rad(80))
+		
+	if event.is_action_pressed("interact"):
+		_try_interact()
 
 
 func _physics_process(delta: float) -> void:
@@ -142,4 +146,11 @@ func _on_item_dropped(item_name: String) -> void:
 	get_tree().current_scene.add_child(dropped_item)
 	dropped_item.toss_from(camera_pos, final_drop_pos)
 		
+func _try_interact():
+	if interaction_ray.is_colliding():
+		var target = interaction_ray.get_collider()
 		
+		if target.has_method("interact"):
+			target.interact(self)
+		else:
+			print("The collided object: " + target.name)		

@@ -26,6 +26,9 @@ shape = SubResource("CapsuleShape3D_4ntmi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.053)
 fov = 46.3
 
+[node name="InteractionRay" type="RayCast3D" parent="Camera3D" unique_id=1188390356]
+transform = Transform3D(1, 0, 0, 0, -0.01589927, -0.9998736, 0, 0.9998736, -0.01589927, 0, 0, -0.07016811)
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=54352934]
 
 [node name="StaminaBar" type="ProgressBar" parent="UI" unique_id=252935032]
