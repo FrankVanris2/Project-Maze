@@ -15,6 +15,24 @@ size = Vector3(1.2, 5, 1.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vo2f"]
 size = Vector3(1, 8, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b643"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4b643"]
+material = SubResource("StandardMaterial3D_4b643")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7biy6"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7biy6"]
+material = SubResource("StandardMaterial3D_7biy6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3y3vg"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3y3vg"]
+material = SubResource("StandardMaterial3D_3y3vg")
+
 [node name="ExitDoor" type="Node3D" unique_id=1130971258]
 script = ExtResource("1_1vo2f")
 
@@ -34,3 +52,27 @@ shape = SubResource("BoxShape3D_gwk0m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=209933172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9976196, 0)
 shape = SubResource("BoxShape3D_1vo2f")
+
+[node name="KeySlot1" type="Marker3D" parent="." unique_id=1760775083]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.1461173, 0.5165297)
+
+[node name="KeyInserted1" type="MeshInstance3D" parent="KeySlot1" unique_id=2003978992]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_4b643")
+
+[node name="KeySlot2" type="Marker3D" parent="." unique_id=453619806]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.27638042, 0.5186471)
+
+[node name="KeyInserted2" type="MeshInstance3D" parent="KeySlot2" unique_id=913486908]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_7biy6")
+
+[node name="KeySlot3" type="Marker3D" parent="." unique_id=13629006]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.39909452, 0.5183142)
+
+[node name="KeyInserted3" type="MeshInstance3D" parent="KeySlot3" unique_id=2140335131]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_3y3vg")
